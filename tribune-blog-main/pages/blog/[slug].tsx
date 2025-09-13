@@ -9,6 +9,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { formatIsoDate } from "@/utils/formatDate";
+import { renderRichText } from "@/lib/renderRichText";
 
 export const getStaticPaths = (async () => {
   const blogsResponse: { data: Blogs } = await axios.get(
@@ -95,7 +96,11 @@ export default function DynamicBlogPage({
               <h1 className="text-[60px] leading-[110%] font-bold">
                 {blog.title}
               </h1>
-
+            </div>
+            
+            {/* Blog Content */}
+            <div className="prose prose-lg max-w-none mt-8">
+              {renderRichText(blog.content)}
             </div>
           </div>
         </div>
