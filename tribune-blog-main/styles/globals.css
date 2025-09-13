@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-dark: #111116;
+  --color-paragraph: #939299;
+  --color-light: #e0dee7;
+  --color-accent: #195ecc;
+  --color-border: #2f2c33;
+  --color-gray: #2b2b36;
+  --font-sans: var(--google-font-manrope);
+  --font-display: var(--google-font-playfair-display);
+  --spacing-custom-container: 1200px;
+  --ease-expo: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@layer components {
+  .heading-1 {
+    font-size: 50px;
+    line-height: 113%;
+    letter-spacing: -0.4px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 24px;
+  }
+  .heading-2 {
+    font-size: 42px;
+    line-height: 115%;
+    letter-spacing: -0.4px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 24px;
+  }
+  .heading-3 {
+    font-size: 36px;
+    line-height: 120%;
+    letter-spacing: -0.4px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 22px;
+  }
+  .heading-4 {
+    font-size: 30px;
+    line-height: 122%;
+    letter-spacing: -0.4px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 20px;
+  }
+  .heading-5 {
+    font-size: 24px;
+    line-height: 125%;
+    letter-spacing: -0.4px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 18px;
+  }
+  .heading-6 {
+    font-size: 18px;
+    line-height: 140%;
+    letter-spacing: -0.4px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 18px;
+  }
+  .button {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    border-radius: 8px;
+    padding: 22px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 115%;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .button:hover {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+  }
+}
+/* Card container */
+.hover-3d {
+  transform-style: preserve-3d;
+  animation: hover3dOut 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  filter: brightness(100%);
+  box-shadow: 0px 50px 80px -20px rgba(0, 0, 0, 0);
+  transition:
+    transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    filter 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-3d:hover {
+  animation: hover3dIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  filter: brightness(110%);
+  box-shadow: 0px 50px 80px -20px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes hover3dIn {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) scale(1);
+  }
+  40% {
+    transform: perspective(1000px) rotateX(5deg) scale(1.05);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(0deg) scale(1.05);
+  }
+}
+@keyframes hover3dOut {
+  0% {
+    transform: perspective(1000px) scale(1.05);
+  }
+  30% {
+    transform: perspective(1000px) scale(1.05);
+  }
+  100% {
+    transform: perspective(1000px) scale(1);
+  }
+}

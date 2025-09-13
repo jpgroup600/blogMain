@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./tribune-blog-cms-main
+    container_name: blog-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URI: mongodb+srv://demo11website:kingkhan@payloadcluster.ogddnbx.mongodb.net/?retryWrites=true&w=majority&appName=PayloadCluster
+      PAYLOAD_SECRET: 5d14b08e6bbf5d8ff55fded4ef78d4f9
+      FRONTEND_URI: http://localhost:3000
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build: ./tribune-blog-main
+    container_name: blog-frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      NEXT_PUBLIC_PAYLOAD_URL: http://backend:4000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
