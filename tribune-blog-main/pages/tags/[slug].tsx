@@ -92,7 +92,7 @@ export default function DynacmicTagsPage({
   return (
     <>
       <Head>
-        <title>Tribune Blog - Tag - {`${tag.title}`}</title>
+        <title>{`Tribune Blog - Tag - ${tag.title}`}</title>
       </Head>
       <section className="flex flex-col items-center px-[30px] pt-[80px]">
         <div className="max-w-custom-container mx-auto flex w-full flex-col items-center">

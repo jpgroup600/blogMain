@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Subscribe = () => {
   return (
-    <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg p-[30px]">
+    <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg p-[10px] md:p-[30px]">
       <Image
         className="absolute inset-0 h-full w-full object-cover"
         src="/subscribe-banner.webp"
@@ -20,11 +20,11 @@ const Subscribe = () => {
         </p>
         <div className="mb-2 flex w-full max-w-[400px]">
           <form
-            className="grid w-full grid-cols-3 gap-1.5"
+            className="grid w-full gap-1.5 md:grid-cols-3"
             onSubmit={(e) => e.preventDefault()}
           >
             <input
-              className="text-light col-span-2 h-[50px] rounded-sm border border-[#e0dee7]/0 bg-[#e0dee726] p-[15px] leading-[115%] focus:border-[#e0dee7]/25 focus:outline-none"
+              className="text-light h-[50px] rounded-sm border border-[#e0dee7]/0 bg-[#e0dee726] p-[15px] leading-[115%] focus:border-[#e0dee7]/25 focus:outline-none md:col-span-2"
               type="text"
               placeholder="Email Address..."
             />

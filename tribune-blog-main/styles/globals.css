@@ -13,49 +13,27 @@
   --ease-expo: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+@utility heading-1 {
+  @apply mb-[24px] text-[36px] leading-[113%] font-bold tracking-[-0.4px] md:text-[50px];
+}
+@utility heading-2 {
+  @apply mb-[24px] text-[30px] leading-[112%] font-bold tracking-[-0.4px] md:text-[42px];
+}
+@utility heading-3 {
+  @apply mb-[22px] text-[24px] leading-[120%] font-bold tracking-[-0.4px] md:text-[36px];
+}
+@utility heading-4 {
+  @apply mb-[20px] text-[21px] leading-[122%] font-bold tracking-[-0.4px] md:text-[30px];
+}
+@utility heading-5 {
+  @apply mb-[18px] text-[18px] leading-[125%] font-bold tracking-[-0.4px] md:text-[24px];
+}
+
+@utility heading-6 {
+  @apply mb-[18px] text-[16px] leading-[140%] font-bold tracking-[-0.4px] md:text-[18px];
+}
+
 @layer components {
-  .heading-1 {
-    font-size: 50px;
-    line-height: 113%;
-    letter-spacing: -0.4px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 24px;
-  }
-  .heading-2 {
-    font-size: 42px;
-    line-height: 115%;
-    letter-spacing: -0.4px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 24px;
-  }
-  .heading-3 {
-    font-size: 36px;
-    line-height: 120%;
-    letter-spacing: -0.4px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 22px;
-  }
-  .heading-4 {
-    font-size: 30px;
-    line-height: 122%;
-    letter-spacing: -0.4px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 20px;
-  }
-  .heading-5 {
-    font-size: 24px;
-    line-height: 125%;
-    letter-spacing: -0.4px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 18px;
-  }
-  .heading-6 {
-    font-size: 18px;
-    line-height: 140%;
-    letter-spacing: -0.4px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 18px;
-  }
   .button {
     background-color: var(--color-accent);
     color: var(--color-light);

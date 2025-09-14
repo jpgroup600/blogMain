@@ -92,7 +92,7 @@ export default function DynacmicCategoryPage({
   return (
     <>
       <Head>
-        <title>Tribune Blog - Category - {`${category.title}`}</title>
+        <title>{`Tribune Blog - Category -  ${category.title}`}</title>
       </Head>
       <section className="flex flex-col items-center px-[30px] pt-[80px]">
         <div className="max-w-custom-container mx-auto flex w-full flex-col items-center">

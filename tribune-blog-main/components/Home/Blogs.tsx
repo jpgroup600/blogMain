@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
-  blogs: Blog[];
+  blogs: (string | Blog)[];
 };
 
 const Blogs: React.FC<Props> = ({ blogs }) => {
   return (
-    <section className="grid grid-cols-3 gap-x-[30px] gap-y-[57px]">
+    <section className="grid gap-x-[30px] gap-y-[40px] md:grid-cols-3 md:gap-y-[57px]">
       {blogs.map((elem, index) => {
+        if (typeof elem === "string") return null;
         if (typeof elem.featuredImage === "string") return null;
         if (typeof elem.category === "string") return null;
 
@@ -32,7 +33,7 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
               <div className="mb-[10px] flex">
                 <Link
                   href={`/category/${elem.category.slug}`}
-                  className="bg-dark text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
+                  className="bg-gray text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
                 >
                   {elem.category.title}
                 </Link>

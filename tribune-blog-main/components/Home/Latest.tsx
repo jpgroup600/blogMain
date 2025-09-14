@@ -19,11 +19,11 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
   });
 
   return (
-    <section className="grid grid-cols-[2.2fr_1fr]">
+    <section className="grid md:grid-cols-[2.2fr_1fr]">
       {/* Grid Area */}
-      <div className="border-border self-stretch border-r pr-[50px]">
+      <div className="border-border self-stretch border-r md:pr-[50px]">
         <div className="flex w-full flex-col">
-          <div className="mb-7 grid w-full gap-x-[30px] gap-y-[74px]">
+          <div className="mb-7 grid w-full gap-x-[30px] gap-y-[55px] md:gap-y-[74px]">
             {filterBlogs.map((elem, index) => {
               if (typeof elem.featuredImage === "string") return null;
               if (typeof elem.category === "string") return null;
@@ -32,7 +32,7 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
                 <div key={index} className="flex flex-col">
                   <Link className="hover-3d" href={`/blog/${elem.slug}`}>
                     <Image
-                      className="h-[500px] rounded-lg object-cover"
+                      className="h-[225px] rounded-lg object-cover md:h-[500px]"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       width={1366}
                       height={689}
@@ -66,7 +66,7 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
         </div>
       </div>
       {/* Detail Area */}
-      <div className="sticky top-[120px] grid content-start gap-y-[70px] pl-[50px]">
+      <div className="sticky top-[120px] grid content-start gap-y-[50px] md:gap-y-[70px] md:pl-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-[30px] leading-[140%] font-medium">Categories</div>
           <div className="flex w-full flex-col">
@@ -105,7 +105,7 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
                 <div key={index} className="flex">
                   <Link href={`/blog/${elem.slug}`}>
                     <Image
-                      className="ease-expo h-[100px] w-[100px] min-w-[100px] rounded-full object-cover transition-transform duration-[400ms] hover:scale-110"
+                      className="ease-expo h-[80px] w-[80px] min-w-[80px] rounded-full object-cover transition-transform duration-[400ms] hover:scale-110 md:h-[100px] md:w-[100px] md:min-w-[100px]"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       alt={elem.featuredImage.alt}
                       height={200}
