@@ -47,16 +47,16 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Tribune Blog</title>
+        <title>AIR & SPACE</title>
       </Head>
-      <section className="flex flex-col items-center px-[15px] pt-[80px] md:px-[30px]">
+      <section className="flex flex-col items-center px-4 pt-[60px] sm:px-6 sm:pt-[80px] lg:px-[30px]">
         <div className="max-w-custom-container mx-auto flex w-full flex-col items-center">
           <FeatureBlog blogs={blogs.docs.slice(0, 2)} />
-          <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />
+          <div className="bg-border my-[20px] h-px w-full sm:my-[30px] lg:my-[50px]" />
           <BlogSection blogs={blogs.docs.slice(2, blogs.docs.length)} />
-          <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />
+          <div className="bg-border my-[20px] h-px w-full sm:my-[30px] lg:my-[50px]" />
           <Subscribe />
-          <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />
+          <div className="bg-border my-[20px] h-px w-full sm:my-[30px] lg:my-[50px]" />
           <Latest
             blogs={blogs.docs}
             featureBlogs={featuredBlogs}

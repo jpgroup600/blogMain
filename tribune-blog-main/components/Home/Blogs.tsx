@@ -9,7 +9,7 @@ type Props = {
 
 const Blogs: React.FC<Props> = ({ blogs }) => {
   return (
-    <section className="grid gap-x-[30px] gap-y-[40px] md:grid-cols-3 md:gap-y-[57px]">
+    <section className="grid gap-x-[20px] gap-y-[30px] sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-[40px] lg:grid-cols-3 lg:gap-y-[57px]">
       {blogs.map((elem, index) => {
         if (typeof elem === "string") return null;
         if (typeof elem.featuredImage === "string") return null;
@@ -22,7 +22,7 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
               href={`/blog/${elem.slug}`}
             >
               <Image
-                className="mb-[17px] h-[230px] rounded-lg object-cover"
+                className="mb-[17px] h-[200px] rounded-lg object-cover sm:h-[230px]"
                 src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                 alt={elem.featuredImage.alt}
                 width={1366}

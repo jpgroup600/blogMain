@@ -19,9 +19,9 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
   });
 
   return (
-    <section className="grid md:grid-cols-[2.2fr_1fr]">
+    <section className="grid grid-cols-1 gap-8 lg:grid-cols-[2.2fr_1fr] lg:gap-0">
       {/* Grid Area */}
-      <div className="border-border self-stretch border-r md:pr-[50px]">
+      <div className="border-border lg:border-r lg:pr-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-7 grid w-full gap-x-[30px] gap-y-[55px] md:gap-y-[74px]">
             {filterBlogs.map((elem, index) => {
@@ -32,7 +32,7 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
                 <div key={index} className="flex flex-col">
                   <Link className="hover-3d" href={`/blog/${elem.slug}`}>
                     <Image
-                      className="h-[225px] rounded-lg object-cover md:h-[500px]"
+                      className="h-[200px] rounded-lg object-cover sm:h-[225px] lg:h-[500px]"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       width={1366}
                       height={689}
@@ -66,7 +66,7 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
         </div>
       </div>
       {/* Detail Area */}
-      <div className="sticky top-[120px] grid content-start gap-y-[50px] md:gap-y-[70px] md:pl-[50px]">
+      <div className="grid content-start gap-y-[50px] md:gap-y-[70px] lg:sticky lg:top-[120px] lg:pl-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-[30px] leading-[140%] font-medium">Categories</div>
           <div className="flex w-full flex-col">
@@ -105,14 +105,14 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
                 <div key={index} className="flex">
                   <Link href={`/blog/${elem.slug}`}>
                     <Image
-                      className="ease-expo h-[80px] w-[80px] min-w-[80px] rounded-full object-cover transition-transform duration-[400ms] hover:scale-110 md:h-[100px] md:w-[100px] md:min-w-[100px]"
+                      className="ease-expo h-[70px] w-[70px] min-w-[70px] rounded-full object-cover transition-transform duration-[400ms] hover:scale-110 sm:h-[80px] sm:w-[80px] sm:min-w-[80px] lg:h-[100px] lg:w-[100px] lg:min-w-[100px]"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       alt={elem.featuredImage.alt}
                       height={200}
                       width={200}
                     />
                   </Link>
-                  <div className="ml-[22px] flex flex-col gap-1.5">
+                  <div className="ml-[15px] flex flex-col gap-1.5 sm:ml-[22px]">
                     <Link
                       href={`/category/${elem.category.slug}`}
                       className="bg-gray text-paragraph w-fit rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
