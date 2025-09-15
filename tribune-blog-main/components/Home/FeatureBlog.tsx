@@ -2,6 +2,7 @@ import type { Blog } from "@/types/payload-types";
 import { formatIsoDate } from "@/utils/formatDate";
 import Image from "next/image";
 import Link from "next/link";
+import ImageWithFallback from "../fallBack/ImageWithFallback";
 
 type Props = {
   blogs: Blog[];
@@ -20,7 +21,7 @@ const FeatureBlog: React.FC<Props> = ({ blogs }) => {
               href={`/blog/${elem.slug}`}
               className="hover-3d group relative flex h-[250px] w-full items-end overflow-hidden rounded-lg sm:h-[300px] lg:h-[680px]"
             >
-              <Image
+              <ImageWithFallback
                 className="absolute inset-0 h-full w-full object-cover"
                 src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                 width={1366}
