@@ -1,9 +1,26 @@
+'use client'
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+
 
 const Header = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  if (!mounted) return null;
   return (
-    <header className="bg-dark fixed top-0 left-0 z-20 flex w-full items-center justify-center px-[30px]">
+    <header className="  dark:bg-black  transition-colors duration-1000 ease-in-out fixed top-0 left-0 z-20 flex w-full items-center justify-center px-[30px]">
       <div className="max-w-custom-container border-border grid w-full grid-cols-[auto_1fr_auto] items-center gap-2.5 border-b py-2.5">
         <button className="flex cursor-pointer gap-1">
           <div className="flex h-[24px] w-[24px] items-center justify-center">
@@ -28,7 +45,7 @@ const Header = () => {
             />
           </Link>
         </div>
-        <button className="flex cursor-pointer gap-1">
+        <button className="flex cursor-pointer gap-3">
           <div className="p-1 text-[13px] leading-[130%] font-semibold uppercase">
             Search
           </div>
@@ -38,7 +55,19 @@ const Header = () => {
             width={24}
             height={24}
             alt="icons"
-          />
+          /> 
+            
+             <button
+        onClick={toggleTheme}
+        className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all  duration-1000 ease-in-out "
+        aria-label="Toggle theme"
+      >
+        {theme === "light" ? (
+          <MoonIcon className="w-6 h-6 text-gray-800 transition-all duration-1000 ease-in-out" />
+        ) : (
+          <SunIcon className="w-6 h-6 text-yellow-400 transition-all duration-1000 ease-in-out" />
+        )}
+      </button>
         </button>
       </div>
     </header>
