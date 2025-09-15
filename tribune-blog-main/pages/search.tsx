@@ -128,7 +128,7 @@ export default function SearchPage() {
                       {blog.title}
                     </Link>
                     <div className="text-accent mt-[4px] mb-[16px] text-[14px] leading-[140%] font-semibold">
-                      tribune.com/blogs/{blog.slug}
+                      /blogs/{blog.slug}
                     </div>
                     <p className="text-paragraph text-[16px] leading-[160%]">
                       {blog.excerpt ||

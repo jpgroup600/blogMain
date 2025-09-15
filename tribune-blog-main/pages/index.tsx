@@ -6,6 +6,7 @@ import Head from "next/head";
 import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import axios from "axios";
 import type { Blog, Blogs, Categories, Tags } from "@/types/payload-types";
+import TrendingBlogs from "@/components/Home/TrendingBlogs";
 
 export const getStaticProps = (async () => {
   const blogsResponse: { data: Blogs } = await axios.get(
@@ -53,7 +54,8 @@ export default function Home({
         <div className="max-w-custom-container mx-auto flex w-full flex-col items-center">
           <FeatureBlog blogs={blogs.docs.slice(0, 2)} />
           <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />
-          <BlogSection blogs={blogs.docs.slice(2, blogs.docs.length)} />
+          {/* <BlogSection blogs={blogs.docs.slice(2, blogs.docs.length)} /> */}
+          <TrendingBlogs blogs={blogs.docs} />
           <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />
           <Subscribe />
           <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />

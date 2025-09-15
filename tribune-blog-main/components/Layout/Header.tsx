@@ -127,6 +127,13 @@ const Header = () => {
             <Link
               onClick={() => setIsMenuActive(false)}
               className="w-fit py-2 text-center text-[18px] leading-[110%] font-bold tracking-[-0.4px]"
+              href="/trending"
+            >
+              Trending
+            </Link>
+            <Link
+              onClick={() => setIsMenuActive(false)}
+              className="w-fit py-2 text-center text-[18px] leading-[110%] font-bold tracking-[-0.4px]"
               href="/contact"
             >
               Contact

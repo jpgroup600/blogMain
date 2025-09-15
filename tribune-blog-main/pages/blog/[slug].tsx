@@ -11,6 +11,7 @@ import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
 import { formatIsoDate } from "@/utils/formatDate";
 import { renderRichText, SlateNode } from "@/lib/renderRichText";
 import BlogSection from "@/components/Home/Blogs";
+import { useViewTracker } from "@/hooks/useViewTracker";
 
 export const getStaticPaths = (async () => {
   const blogsResponse: { data: Blogs } = await axios.get(
@@ -64,6 +65,9 @@ export const getStaticProps = (async (context) => {
 export default function DynamicBlogPage({
   blog,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  // Track view when component mounts
+  useViewTracker({ blogId: blog.id });
+
   if (typeof blog.featuredImage === "string") return null;
   if (typeof blog.category === "string") return null;
 

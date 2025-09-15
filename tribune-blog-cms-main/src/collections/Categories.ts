@@ -8,6 +8,8 @@ const Categories: CollectionConfig = {
   },
   admin: {
     useAsTitle: "title",
+    defaultColumns: ["title", "parent", "slug", "updatedAt"],
+    listSearchableFields: ["title", "slug"],
   },
   fields: [
     {
@@ -19,6 +21,22 @@ const Categories: CollectionConfig = {
       name: "slug",
       type: "text",
       unique: true,
+    },
+    {
+      name: "parent",
+      type: "relationship",
+      relationTo: "categories",
+      admin: {
+        description: "Select parent category (leave empty for main category)",
+        position: "sidebar",
+      },
+      filterOptions: () => {
+        return {
+          parent: {
+            exists: false, // Only show main categories (no parent) as options
+          },
+        };
+      },
     },
   ],
   hooks: {

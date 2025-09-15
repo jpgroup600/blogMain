@@ -16,7 +16,9 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  globals: {};
+  globals: {
+    'feature-blogs': FeatureBlog;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -61,12 +63,14 @@ export interface Blog {
   id: string;
   featuredImage: string | Media;
   title: string;
+  excerpt?: string | null;
   slug?: string | null;
   content: {
     [k: string]: unknown;
   }[];
   category: string | Category;
   tags?: (string | Tag)[] | null;
+  relatedBlogs?: (string | Blog)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -74,17 +78,29 @@ export interface Blog {
   };
   updatedAt: string;
   createdAt: string;
+  viewCount: number;
+  trendingScore: number;
+  lastViewedAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
+export interface SubCategory {
+  id: string;
+  title: string;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
 export interface Category {
   id: string;
   title: string;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
+  subCategories?: (string | SubCategory)[] | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -130,6 +146,16 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feature-blogs".
+ */
+export interface FeatureBlog {
+  id: string;
+  featuredBlogs?: (string | Blog)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 
 

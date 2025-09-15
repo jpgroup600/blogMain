@@ -58,6 +58,9 @@ export interface Blog {
   category: string | Category;
   tags?: (string | Tag)[] | null;
   relatedBlogs?: (string | Blog)[] | null;
+  viewCount?: number;
+  trendingScore?: number;
+  lastViewedAt?: string;
   meta?: {
     title?: string | null;
     description?: string | null;
