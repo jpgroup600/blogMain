@@ -1,8 +1,7 @@
 import { Blog } from "@/types/payload-types";
 import { formatIsoDate } from "@/utils/formatDate";
-import Image from "next/image";
 import Link from "next/link";
-import ImageWithFallback from "../fallBack/ImageWithFallback";
+import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
 
 type Props = {
   blogs: (string | Blog)[];
@@ -10,7 +9,7 @@ type Props = {
 
 const Blogs: React.FC<Props> = ({ blogs }) => {
   return (
-    <section className="grid gap-x-[20px] gap-y-[30px] sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-[40px] lg:grid-cols-3 lg:gap-y-[57px]">
+    <section className="grid gap-x-[30px] gap-y-[40px] md:grid-cols-3 md:gap-y-[57px]">
       {blogs.map((elem, index) => {
         if (typeof elem === "string") return null;
         if (typeof elem.featuredImage === "string") return null;
@@ -23,7 +22,7 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
               href={`/blog/${elem.slug}`}
             >
               <ImageWithFallback
-                className="mb-[17px] h-[200px] rounded-lg object-cover sm:h-[230px]"
+                className="mb-[17px] h-[230px] rounded-lg object-cover"
                 src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                 alt={elem.featuredImage.alt}
                 width={1366}
@@ -34,7 +33,7 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
               <div className="mb-[10px] flex">
                 <Link
                   href={`/category/${elem.category.slug}`}
-                  className="bg-gray text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
+                  className="bg-gray text-light dark:text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
                 >
                   {elem.category.title}
                 </Link>

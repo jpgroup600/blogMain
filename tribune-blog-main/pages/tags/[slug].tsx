@@ -94,10 +94,10 @@ export default function DynacmicTagsPage({
       <Head>
         <title>{`Tribune Blog - Tag - ${tag.title}`}</title>
       </Head>
-      <section className="flex flex-col items-center px-[30px] pt-[80px]">
+      <section className="flex flex-col items-center px-[15px] pt-[80px] md:px-[30px]">
         <div className="max-w-custom-container mx-auto flex w-full flex-col items-center">
-          <div className="flex w-full items-center justify-center px-[10%] py-[85px]">
-            <h1 className="m-0 text-center text-[60px] leading-[110%] font-bold">
+          <div className="flex w-full items-center justify-center px-[10%] py-[50px] md:py-[85px]">
+            <h1 className="m-0 text-center text-[30px] leading-[110%] font-bold md:text-[60px]">
               {tag.title}
             </h1>
           </div>

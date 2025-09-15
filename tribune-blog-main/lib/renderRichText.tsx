@@ -129,7 +129,10 @@ export function renderRichText(nodes: SlateNode[]): React.ReactNode {
         );
       case "li":
         return (
-          <li className="text-paragraph text-lg leading-[170%]" key={i}>
+          <li
+            className="text-dark dark:text-paragraph text-lg leading-[170%]"
+            key={i}
+          >
             {renderRichText(node.children)}
           </li>
         );
@@ -169,7 +172,7 @@ export function renderRichText(nodes: SlateNode[]): React.ReactNode {
         // fallback
         return (
           <p
-            className="text-paragraph mb-[26px] text-lg leading-[170%]"
+            className="text-dark dark:text-paragraph mb-[26px] text-lg leading-[170%]"
             key={i}
           >
             {renderRichText(node.children)}

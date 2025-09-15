@@ -11,11 +11,11 @@ const Subscribe = () => {
         height={689}
       />
       <div className="bg-accent relative z-10 flex w-full max-w-[790px] flex-col items-center justify-center rounded-lg px-[10%] py-[62px]">
-        <h2 className="heading-2 mb-4 text-center">
+        <h2 className="heading-2 text-light mb-4 text-center">
           Subscribe <span className="font-display font-normal italic">to</span>{" "}
           Tribune
         </h2>
-        <p className="mb-[26px] max-w-[330px] text-center opacity-65">
+        <p className="text-light mb-[26px] max-w-[330px] text-center opacity-65">
           Sign up to our newsletters and we`&apos;ll keep you in the loop.
         </p>
         <div className="mb-2 flex w-full max-w-[400px]">

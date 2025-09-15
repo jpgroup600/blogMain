@@ -21,7 +21,7 @@ const playfairDisplay = Playfair_Display({
 const Layout: React.FC<Props> = ({ children }) => {
   return (
     <main
-      className={`${playfairDisplay.variable} ${manrope.variable} bg-dark text-light relative flex flex-col`}
+      className={`${playfairDisplay.variable} ${manrope.variable} bg-light dark:bg-dark text-dark dark:text-light relative flex flex-col`}
     >
       <Header />
       {children}

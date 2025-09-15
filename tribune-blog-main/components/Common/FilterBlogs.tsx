@@ -6,8 +6,8 @@ import type {
   Tags,
 } from "@/types/payload-types";
 import { formatIsoDate } from "@/utils/formatDate";
-import Image from "next/image";
 import Link from "next/link";
+import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
 
 type Props = {
   blogs: Blog[];
@@ -25,9 +25,9 @@ const FilterBlogs: React.FC<Props> = ({
   tag,
 }) => {
   return (
-    <section className="grid grid-cols-[2.2fr_1fr]">
+    <section className="grid md:grid-cols-[2.2fr_1fr]">
       {/* Grid Area */}
-      <div className="border-border self-stretch border-r pr-[50px]">
+      <div className="border-border self-stretch border-r md:pr-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-7 grid w-full gap-x-[30px] gap-y-[74px]">
             {blogs.map((elem, index) => {
@@ -35,9 +35,12 @@ const FilterBlogs: React.FC<Props> = ({
               if (typeof elem.category === "string") return null;
 
               return (
-                <div key={index} className="flex items-center gap-10">
+                <div
+                  key={index}
+                  className="flex flex-col items-center gap-10 md:flex-row"
+                >
                   <Link className="hover-3d" href={`/blog/${elem.slug}`}>
-                    <Image
+                    <ImageWithFallback
                       className="min-h-[230px] max-w-[326px] rounded-lg object-cover"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       width={1366}
@@ -49,7 +52,7 @@ const FilterBlogs: React.FC<Props> = ({
                     <div className="mb-[10px] flex items-center">
                       <Link
                         href={`/category/${elem.category.slug}`}
-                        className="bg-gray text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
+                        className="bg-gray text-light dark:text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
                       >
                         {elem.category.title}
                       </Link>
@@ -71,7 +74,7 @@ const FilterBlogs: React.FC<Props> = ({
         </div>
       </div>
       {/* Detail Area */}
-      <div className="sticky top-[120px] grid content-start gap-y-[70px] pl-[50px]">
+      <div className="sticky top-[120px] grid content-start gap-y-[70px] md:pl-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-[30px] leading-[140%] font-medium">Categories</div>
           <div className="flex w-full flex-col">
@@ -88,7 +91,7 @@ const FilterBlogs: React.FC<Props> = ({
                       <div
                         data-active={elem.slug === category?.slug}
                         className={
-                          "bg-light h-full w-full scale-0 rounded-full transition-transform group-hover:scale-100 data-[active='true']:scale-100"
+                          "bg-dark dark:bg-light h-full w-full scale-0 rounded-full transition-transform group-hover:scale-75 data-[active='true']:scale-75 dark:group-hover:scale-100 dark:data-[active='true']:scale-100"
                         }
                       ></div>
                     </div>
@@ -105,7 +108,7 @@ const FilterBlogs: React.FC<Props> = ({
             {tags.docs.map((elem, index) => {
               return (
                 <Link
-                  className="border-border hover:bg-light hover:text-dark data-[active='true']:text-dark data-[active='true']:bg-light text-paragraph ease-expo rounded-md border px-[20px] py-[12px] text-[13px] leading-[110%] font-semibold transition-colors duration-[400ms]"
+                  className="border-border hover:bg-dark hover:text-light dark:hover:bg-light dark:hover:text-dark data-[active='true']:text-light dark:data-[active='true']:text-dark data-[active='true']:bg-dark dark:data-[active='true']:bg-light text-dark dark:text-paragraph ease-expo rounded-md border px-[20px] py-[12px] text-[13px] leading-[110%] font-semibold transition-colors duration-[400ms]"
                   key={index}
                   href={`/tags/${elem.slug}`}
                   data-active={elem.slug === tag?.slug}
