@@ -73,13 +73,7 @@ const Header = () => {
           </div>
           <div className="order-1 flex items-center py-[5px] md:order-2 md:justify-center md:py-0">
             <Link href="/">
-              <Image
-                className="h-[40px] object-contain invert-100 dark:invert-0"
-                src="/logo.svg"
-                width={180}
-                height={40}
-                alt="logo"
-              />
+              <h1 className="text-[30px] leading-[110%] font-bold tracking-[-0.4px]">AIR & SPACE</h1>
             </Link>
           </div>
           <div className="order-3 hidden items-center justify-end gap-2 md:flex">
