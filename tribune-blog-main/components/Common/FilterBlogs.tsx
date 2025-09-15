@@ -74,7 +74,7 @@ const FilterBlogs: React.FC<Props> = ({
         </div>
       </div>
       {/* Detail Area */}
-      <div className="sticky top-[120px] grid content-start gap-y-[70px] md:pl-[50px]">
+      <div className="sticky top-[100px] h-fit grid content-start gap-y-[70px] md:pl-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-[30px] leading-[140%] font-medium">Categories</div>
           <div className="flex w-full flex-col">
