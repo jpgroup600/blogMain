@@ -9,7 +9,7 @@ import type { Blog, Blogs, Categories, Tags } from "@/types/payload-types";
 
 export const getStaticProps = (async () => {
   const blogsResponse: { data: Blogs } = await axios.get(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs`,
+    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs?limit=10`,
   );
   const featureBlogsResponse: { data: { featuredBlogs: Blog[] } } =
     await axios.get(

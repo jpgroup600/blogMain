@@ -2,6 +2,8 @@ import type { Blog, Categories, Tags } from "@/types/payload-types";
 import { formatIsoDate } from "@/utils/formatDate";
 import Link from "next/link";
 import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
+import { useState } from "react";
+import axios from "axios";
 
 type Props = {
   featureBlogs: Blog[];
@@ -10,14 +12,40 @@ type Props = {
   categories: Categories;
 };
 
-const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
-  const filterBlogs = blogs.slice(0, 5);
-  // const filterBlogs = blogs.filter((e) => {
-  //   if (typeof e.category !== "string") {
-  //     return e.category.title === categories.docs[0].title;
-  //   }
-  //   return [];
-  // });
+const Latest: React.FC<Props> = ({ blogs: initialBlogs, featureBlogs, categories, tags }) => {
+  const [displayedBlogs, setDisplayedBlogs] = useState(initialBlogs.slice(0, 5));
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  const loadMoreBlogs = async () => {
+    if (loading || !hasMore) return;
+    
+    setLoading(true);
+    const nextPage = currentPage + 1;
+    
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs?limit=5&page=${nextPage}`
+      );
+      
+      const newBlogs = response.data?.docs ?? [];
+      
+      if (newBlogs.length > 0) {
+        setDisplayedBlogs(prev => [...prev, ...newBlogs]);
+        setCurrentPage(nextPage);
+        // If we got less than 5 blogs, we've reached the end
+        setHasMore(newBlogs.length === 5);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error('Error loading more blogs:', error);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="grid md:grid-cols-[2.2fr_1fr]">
@@ -25,7 +53,7 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
       <div className="border-border self-stretch border-r md:pr-[50px]">
         <div className="flex w-full flex-col">
           <div className="mb-7 grid w-full gap-x-[30px] gap-y-[55px] md:gap-y-[74px]">
-            {filterBlogs.map((elem, index) => {
+            {displayedBlogs.map((elem, index) => {
               if (typeof elem.featuredImage === "string") return null;
               if (typeof elem.category === "string") return null;
 
@@ -62,15 +90,19 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
                 </div>
               );
             })}
-            <button
-              style={{
-                transition:
-                  "color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-              }}
-              className="button"
-            >
-              See All Posts
-            </button>
+            {hasMore && (
+              <button
+                style={{
+                  transition:
+                    "color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                }}
+                className="button"
+                onClick={loadMoreBlogs}
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "See More Posts"}
+              </button>
+            )}
           </div>
         </div>
       </div>
