@@ -2,6 +2,7 @@ import type { Blog, Categories, Tags } from "@/types/payload-types";
 import { formatIsoDate } from "@/utils/formatDate";
 import Image from "next/image";
 import Link from "next/link";
+import ImageWithFallback from "../fallBack/ImageWithFallback";
 
 type Props = {
   featureBlogs: Blog[];
@@ -25,19 +26,21 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
         <div className="flex w-full flex-col">
           <div className="mb-7 grid w-full gap-x-[30px] gap-y-[55px] md:gap-y-[74px]">
             {filterBlogs.map((elem, index) => {
+       
               if (typeof elem.featuredImage === "string") return null;
               if (typeof elem.category === "string") return null;
-
+         
               return (
                 <div key={index} className="flex flex-col">
                   <Link className="hover-3d" href={`/blog/${elem.slug}`}>
-                    <Image
+                    <ImageWithFallback
                       className="h-[200px] rounded-lg object-cover sm:h-[225px] lg:h-[500px]"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       width={1366}
                       height={689}
                       alt={elem.featuredImage.alt}
                     />
+
                   </Link>
                   <div className="mt-[27px] flex flex-col">
                     <div className="mb-[10px] flex items-center">
@@ -98,13 +101,17 @@ const Latest: React.FC<Props> = ({ blogs, featureBlogs, categories, tags }) => {
           <div className="mb-[30px] text-base font-semibold">Feature</div>
           <div className="grid gap-y-[35px]">
             {featureBlogs.map((elem, index) => {
+              let isImageNull = false
+              let isTextNull = false
               if (typeof elem.featuredImage === "string") return null;
               if (typeof elem.category === "string") return null;
+              if (elem.featuredImage.url!) { isImageNull = true; }
+              if (elem.title!) { isTextNull = true; }
 
               return (
                 <div key={index} className="flex">
                   <Link href={`/blog/${elem.slug}`}>
-                    <Image
+                    <ImageWithFallback
                       className="ease-expo h-[70px] w-[70px] min-w-[70px] rounded-full object-cover transition-transform duration-[400ms] hover:scale-110 sm:h-[80px] sm:w-[80px] sm:min-w-[80px] lg:h-[100px] lg:w-[100px] lg:min-w-[100px]"
                       src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage.url}`}
                       alt={elem.featuredImage.alt}
