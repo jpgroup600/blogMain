@@ -19,13 +19,7 @@ const Header = () => {
         </button>
         <div className="flex items-center justify-center">
           <Link href="/">
-            <Image
-              className="h-[40px] object-contain"
-              src="/logo.svg"
-              width={180}
-              height={40}
-              alt="logo"
-            />
+           <span className="text-light text-[20px] font-bold">AIR & SPACE</span>
           </Link>
         </div>
         <button className="flex cursor-pointer gap-1">
