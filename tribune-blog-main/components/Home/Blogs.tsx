@@ -15,11 +15,12 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
         if (typeof elem.featuredImage === "string") return null;
         if (typeof elem.category === "string") return null;
 
+
         return (
           <div className="flex flex-col" key={index}>
             <Link
               className="ease-expo transition-transform duration-[400ms] hover:scale-105"
-              href={`/blog/${elem.slug}`}
+              href={`/blog/${decodeURIComponent(elem.slug)}`}
             >
               <ImageWithFallback
                 className="mb-[17px] h-[230px] rounded-lg object-cover"
@@ -41,7 +42,7 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
                   {formatIsoDate(elem.createdAt)}
                 </div>
               </div>
-              <Link href={`/blog/${elem.slug}`}>
+              <Link href={`/blog/${decodeURIComponent(elem.slug)}`}>
                 <h5 className="heading-5">{elem.title}</h5>
               </Link>
             </div>

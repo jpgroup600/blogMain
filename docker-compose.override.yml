@@ -1,12 +1,13 @@
+# Override for development - builds backend first, then frontend
 services:
   backend:
     build: ./tribune-blog-cms-main
     container_name: blog-backend
     restart: unless-stopped
     environment:
-      DATABASE_URI: ${DATABASE_URI}
-      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-      FRONTEND_URI: ${FRONTEND_URI}
+      - DATABASE_URI=${DATABASE_URI}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+      - FRONTEND_URI=${FRONTEND_URI}
     ports:
       - "4000:4000"
 
@@ -15,10 +16,9 @@ services:
     container_name: blog-frontend
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
-      NEXT_PUBLIC_PAYLOAD_URL: ${NEXT_PUBLIC_PAYLOAD_URL}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NEXT_PUBLIC_PAYLOAD_URL=${NEXT_PUBLIC_PAYLOAD_URL}
     ports:
       - "3000:3000"
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend

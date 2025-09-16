@@ -1,32 +1,16 @@
 import Head from "next/head";
 
 import type {
-  InferGetStaticPropsType,
-  GetStaticProps,
-  GetStaticPaths,
+  InferGetServerSidePropsType,
+  GetServerSideProps,
 } from "next";
 import { Blog, Blogs, Categories, Category, Tags } from "@/types/payload-types";
 import axios from "axios";
 import FilterBlogs from "@/components/Common/FilterBlogs";
 
-export const getStaticPaths = (async () => {
-  const categoriesResponse: { data: Categories } = await axios.get(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?limit=0`,
-  );
+// Removed getStaticPaths - using getServerSideProps instead
 
-  const paths = categoriesResponse.data.docs.map((elem) => ({
-    params: {
-      slug: elem.slug,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}) satisfies GetStaticPaths;
-
-export const getStaticProps = (async (context) => {
+export const getServerSideProps = (async (context) => {
   const { params } = context;
 
   // assuming your dynamic page is [slug].tsx
@@ -74,9 +58,8 @@ export const getStaticProps = (async (context) => {
       categories: categoriesResponse.data,
       tags: tagsResponse.data,
     },
-    revalidate: 60,
   };
-}) satisfies GetStaticProps<{
+}) satisfies GetServerSideProps<{
   category: Category;
   blogs: Blog[];
   tags: Tags;
@@ -88,7 +71,7 @@ export default function DynacmicCategoryPage({
   category,
   categories,
   tags,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>

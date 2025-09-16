@@ -129,7 +129,7 @@ export default function DynamicBlogPage({
               <div className="flex flex-col">
                 <div className="mb-[10px] flex">
                   <Link
-                    href={`/category/${blog.category.slug}`}
+                    href={`/blog/${decodeURIComponent(blog.category.slug)}`}
                     className="bg-gray text-light dark:text-paragraph rounded-sm px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase"
                   >
                     {blog.category.title}
