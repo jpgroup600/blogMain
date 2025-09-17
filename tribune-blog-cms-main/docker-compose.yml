@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  cms:
+    build: .
+    container_name: blog-cms
+    restart: unless-stopped
+    environment:
+      DATABASE_URI: ${DATABASE_URI}
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      FRONTEND_URI: ${FRONTEND_URI}
+    ports:
+      - "4000:4000"
+    volumes:
+      - media_uploads:/app/media
+    env_file:
+      - .env
+
+volumes:
+  media_uploads:

@@ -39,7 +39,9 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
-  cors: [process.env.FRONTEND_URI],
+  cors: [
+    process.env.FRONTEND_URI || 'http://localhost:3000'
+  ],
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
