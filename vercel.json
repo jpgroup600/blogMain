@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "tribune-blog-main/package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "tribune-blog-cms-main/package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/tribune-blog-cms-main/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/tribune-blog-main/$1"
+    }
+  ]
+}
