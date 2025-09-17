@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-dark: #111116;
   --color-paragraph: #939299;
@@ -11,6 +13,10 @@
   --font-display: var(--google-font-playfair-display);
   --spacing-custom-container: 1200px;
   --ease-expo: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --shadow-link-hover: inset 0 -28px 0 0 #e0dee7;
+  --shadow-link: inset 0 -1px 0 0 #e0dee7;
+  --shadow-dark-link-hover: inset 0 -28px 0 0 #111116;
+  --shadow-dark-link: inset 0 -1px 0 0 #111116;
 }
 
 @utility heading-1 {
@@ -33,26 +39,10 @@
   @apply mb-[18px] text-[16px] leading-[140%] font-bold tracking-[-0.4px] md:text-[18px];
 }
 
-@layer components {
-  .button {
-    background-color: var(--color-accent);
-    color: var(--color-light);
-    border-radius: 8px;
-    padding: 22px 30px;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 115%;
-    text-align: center;
-    cursor: pointer;
-    transition:
-      color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .button:hover {
-    background-color: var(--color-light);
-    color: var(--color-dark);
-  }
+@utility button {
+  @apply bg-accent text-light hover:bg-dark hover:text-light dark:hover:bg-light dark:hover:text-dark cursor-pointer rounded-lg px-[30px] py-[22px] text-center text-[16px] leading-[115%] font-semibold;
 }
+
 /* Card container */
 .hover-3d {
   transform-style: preserve-3d;
