@@ -31,8 +31,13 @@ const FilterBlogs: React.FC<Props> = ({
         <div className="flex w-full flex-col">
           <div className="mb-7 grid w-full gap-x-[30px] gap-y-[74px]">
             {blogs.map((elem, index) => {
+               console.log("Blog index:", index,
+              "PAYLOAD_URL:", process.env.NEXT_PUBLIC_PAYLOAD_URL,
+              "featuredImage:", elem.featuredImage);
               if (typeof elem.featuredImage === "string") return null;
               if (typeof elem.category === "string") return null;
+              console.log("Image URL:", `${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage?.url}`);
+
 
               return (
                 <div

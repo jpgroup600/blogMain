@@ -1,9 +1,5 @@
 import Head from "next/head";
-import type {
-  InferGetStaticPropsType,
-  GetStaticProps,
-  GetStaticPaths,
-} from "next";
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { Blog, Blogs } from "@/types/payload-types";
 import axios from "axios";
 import Link from "next/link";
@@ -13,58 +9,40 @@ import { renderRichText, SlateNode } from "@/lib/renderRichText";
 import BlogSection from "@/components/Home/Blogs";
 import { useViewTracker } from "@/hooks/useViewTracker";
 
-export const getStaticPaths = (async () => {
-  const blogsResponse: { data: Blogs } = await axios.get(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs?limit=0`,
-  );
-
-  const paths = blogsResponse.data.docs.map((blog) => ({
-    params: {
-      slug: blog.slug,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}) satisfies GetStaticPaths;
-
-export const getStaticProps = (async (context) => {
+// ✅ Change to getServerSideProps to avoid build-time API calls
+export const getServerSideProps = (async (context) => {
   const { params } = context;
   const blogSlug = params?.slug as string;
 
-  // 1. fetch the blog by slug
-  const blogResponse: { data: Blogs } = await axios.get(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs`,
-    {
-      params: {
-        "where[slug][equals]": blogSlug,
+  try {
+    const payloadUrl = process.env.PAYLOAD_URL;
+
+    const blogResponse: { data: Blogs } = await axios.get(
+      `${payloadUrl}/api/blogs`,
+      {
+        params: {
+          "where[slug][equals]": blogSlug,
+        },
       },
-    },
-  );
+    );
 
-  const blog = blogResponse.data?.docs?.[0];
+    const blog = blogResponse.data?.docs?.[0];
+    if (!blog) {
+      return { notFound: true };
+    }
 
-  if (!blog) {
     return {
-      notFound: true,
+      props: { blog },
     };
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    return { notFound: true };
   }
-
-  return {
-    props: {
-      blog,
-    },
-    revalidate: 60,
-  };
-}) satisfies GetStaticProps<{
-  blog: Blog;
-}>;
+}) satisfies GetServerSideProps<{ blog: Blog }>;
 
 export default function DynamicBlogPage({
   blog,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   // Track view when component mounts
   useViewTracker({ blogId: blog.id });
 
@@ -83,7 +61,6 @@ export default function DynamicBlogPage({
           ? null
           : blog.meta?.image && (
               <>
-                {/* Open Graph for social sharing */}
                 <meta
                   property="og:image"
                   content={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${blog.meta.image.url}`}
@@ -97,8 +74,6 @@ export default function DynamicBlogPage({
                   property="og:description"
                   content={blog.meta?.description || ""}
                 />
-
-                {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta
                   name="twitter:image"

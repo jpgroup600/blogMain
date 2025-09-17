@@ -1,4 +1,4 @@
-import Image from "next/image";
+'use client'
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
