@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { hostname: "localhost" },
-      { hostname: "backend.pp.stupidrootree.co.kr" }
+      { hostname: "*.stupidrootree.co.kr" }
     ],
   },
   // Skip build-time static generation for pages that require API calls

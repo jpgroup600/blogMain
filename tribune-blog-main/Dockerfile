@@ -14,8 +14,8 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Remove devDependencies after build
-RUN npm ci --omit=dev && npm cache clean --force
+# Keep TypeScript for runtime config loading, remove other devDependencies
+RUN npm ci --omit=dev && npm install typescript && npm cache clean --force
 
 EXPOSE 3000
 
