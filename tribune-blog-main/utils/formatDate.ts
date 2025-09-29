@@ -7,3 +7,7 @@ export function formatIsoDate(isoString: string): string {
     year: "numeric",
   }).format(date);
 }
+
+export function getBlogDate(blog: { publishDate?: string | null; createdAt: string }): string {
+  return blog.publishDate || blog.createdAt;
+}

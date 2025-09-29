@@ -1,4 +1,3 @@
-import BlogSection from "@/components/Home/Blogs";
 import FeatureBlog from "@/components/Home/FeatureBlog";
 import Latest from "@/components/Home/Latest";
 import Subscribe from "@/components/Home/Subscribe";
@@ -52,7 +51,7 @@ export default function Home({
       </Head>
       <section className="flex flex-col items-center px-[15px] pt-[80px] md:px-[30px]">
         <div className="max-w-custom-container mx-auto flex w-full flex-col items-center">
-          <FeatureBlog blogs={blogs.docs.slice(0, 2)} />
+          <FeatureBlog blogs={featuredBlogs} />
           <div className="bg-border my-[30px] h-px w-full md:my-[50px]" />
           {/* <BlogSection blogs={blogs.docs.slice(2, blogs.docs.length)} /> */}
           <TrendingBlogs blogs={blogs.docs} />

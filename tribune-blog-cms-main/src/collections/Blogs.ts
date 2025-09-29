@@ -14,7 +14,7 @@ const Blogs: CollectionConfig = {
   },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "viewCount", "trendingScore", "category", "createdAt"],
+    defaultColumns: ["title", "publishDate", "viewCount", "trendingScore", "category"],
     listSearchableFields: ["title", "excerpt"],
   },
   fields: [
@@ -41,6 +41,16 @@ const Blogs: CollectionConfig = {
       name: "slug",
       type: "text",
       unique: true,
+    },
+    {
+      name: "publishDate",
+      type: "date",
+      admin: {
+        description: "Publish date for the blog post (can be manually set)",
+        date: {
+          pickerAppearance: "dayAndTime",
+        },
+      },
     },
     {
       name: "content",
@@ -83,6 +93,7 @@ const Blogs: CollectionConfig = {
         readOnly: true,
       },
     },
+    
     {
       name: "lastViewedAt",
       type: "date",
@@ -94,10 +105,16 @@ const Blogs: CollectionConfig = {
   ],
   hooks: {
     beforeChange: [
-      ({ data }) => {
+      ({ data, operation }) => {
         if (data?.title && !data?.slug) {
           data.slug = generateSlug(data.title);
         }
+        
+        // Auto-set publishDate to current date if not provided (only for new blogs)
+        if (operation === 'create' && !data?.publishDate) {
+          data.publishDate = new Date().toISOString();
+        }
+        
         return data;
       },
     ],

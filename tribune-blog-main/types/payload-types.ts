@@ -32,6 +32,7 @@ export interface Category {
   slug: string;
   updatedAt: string;
   createdAt: string;
+  parent?: (string | null) | Category;
 }
 
 export type Categories = PaginatedDocs<Category>;
@@ -42,6 +43,7 @@ export interface Tag {
   slug: string;
   updatedAt: string;
   createdAt: string;
+  parent?: string | Category;
 }
 
 export type Tags = PaginatedDocs<Tag>;
@@ -68,6 +70,7 @@ export interface Blog {
   };
   updatedAt: string;
   createdAt: string;
+  publishDate?: string;
 }
 
 export type Blogs = PaginatedDocs<Blog>;

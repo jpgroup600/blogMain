@@ -16,17 +16,13 @@ export const getServerSideProps = (async (context) => {
   // assuming your dynamic page is [slug].tsx
   const categorySlug = params?.slug as string;
 
-  // 1. get category by slug
-  const categoryResponse: { data: Categories } = await axios.get(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories`,
-    {
-      params: {
-        "where[slug][equals]": categorySlug,
-      },
-    },
+  // 1. get all categories first
+  const categoriesResponse: { data: Categories } = await axios.get(
+    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?limit=0`,
   );
 
-  const category = categoryResponse.data?.docs?.[0];
+  // 2. find the specific category by slug
+  const category = categoriesResponse.data?.docs?.find(cat => cat.slug === categorySlug);
 
   if (!category) {
     return {
@@ -34,19 +30,31 @@ export const getServerSideProps = (async (context) => {
     };
   }
 
-  // 2. get blogs for that category by ID
+  // 3. get blogs for that category by ID (including child categories)
+  let blogQuery: Record<string, string> = {
+    "where[category][equals]": category.id,
+  };
+
+  // If this is a parent category, also include blogs from child categories
+  const childCategories = categoriesResponse.data?.docs?.filter(cat => 
+    cat.parent && typeof cat.parent === 'object' && cat.parent.id === category.id
+  ) || [];
+
+  if (childCategories.length > 0) {
+    // Include blogs from parent category OR any child categories
+    const categoryIds = [category.id, ...childCategories.map(child => child.id)];
+    blogQuery = {
+      "where[category][in]": categoryIds.join(','),
+    };
+  }
+
   const blogsResponse: { data: Blogs } = await axios.get(
     `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs?limit=0`,
     {
-      params: {
-        "where[category][equals]": category.id,
-      },
+      params: blogQuery,
     },
   );
 
-  const categoriesResponse: { data: Categories } = await axios.get(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?limit=0`,
-  );
   const tagsResponse: { data: Tags } = await axios.get(
     `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/tags?limit=0`,
   );

@@ -8,7 +8,7 @@ import { Blog, Blogs } from "@/types/payload-types";
 import axios from "axios";
 import Link from "next/link";
 import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
-import { formatIsoDate } from "@/utils/formatDate";
+import { formatIsoDate, getBlogDate } from "@/utils/formatDate";
 import { renderRichText, SlateNode } from "@/lib/renderRichText";
 import BlogSection from "@/components/Home/Blogs";
 import { useViewTracker } from "@/hooks/useViewTracker";
@@ -33,13 +33,14 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (context) => {
   const { params } = context;
   const blogSlug = params?.slug as string;
+  const urlEncodedSlug = decodeURIComponent(blogSlug);
 
   // 1. fetch the blog by slug
   const blogResponse: { data: Blogs } = await axios.get(
     `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/blogs`,
     {
       params: {
-        "where[slug][equals]": blogSlug,
+        "where[slug][equals]": urlEncodedSlug,
       },
     },
   );
@@ -135,7 +136,7 @@ export default function DynamicBlogPage({
                     {blog.category.title}
                   </Link>
                   <div className="text-paragraph px-2.5 py-1.5 text-[11px] leading-[110%] font-medium uppercase">
-                    {formatIsoDate(blog.createdAt)}
+                    {formatIsoDate(getBlogDate(blog))}
                   </div>
                 </div>
                 <h1 className="text-[30px] leading-[110%] font-bold md:text-[60px] md:leading-[110%]">

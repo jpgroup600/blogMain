@@ -1,5 +1,5 @@
 import type { Blog } from "@/types/payload-types";
-import { formatIsoDate } from "@/utils/formatDate";
+import {getBlogDate } from "@/utils/formatDate";
 import Link from "next/link";
 import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
 
@@ -25,7 +25,7 @@ const TrendingBlogs: React.FC<Props> = ({
     <div className="flex w-full flex-col">
       <div className="mb-[30px] text-base font-semibold">{title}</div>
       <div className="grid gap-y-[35px]">
-        {trendingBlogs.map((blog, index) => {
+        {trendingBlogs.map((blog) => {
           if (typeof blog.featuredImage === "string") return null;
           if (typeof blog.category === "string") return null;
 
@@ -56,7 +56,7 @@ const TrendingBlogs: React.FC<Props> = ({
                   <h6 className="heading-6">{blog.title}</h6>
                 </Link>
                 <div className="text-xs text-gray-500">
-                  {formatIsoDate(blog.createdAt)}
+                  {getBlogDate(blog)}
                 </div>
               </div>
             </div>

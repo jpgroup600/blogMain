@@ -2,7 +2,6 @@ import Head from "next/head";
 import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import { Blog, Blogs } from "@/types/payload-types";
 import axios from "axios";
-import TrendingBlogs from "@/components/Home/TrendingBlogs";
 import FilterBlogs from "@/components/Common/FilterBlogs";
 import { Categories, Tags } from "@/types/payload-types";
 
