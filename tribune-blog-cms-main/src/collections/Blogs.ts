@@ -48,6 +48,16 @@ const Blogs: CollectionConfig = {
       required: true,
     },
     {
+      name: "structuredData",
+      label: "Structured Data (JSON-LD)",
+      type: "textarea",
+      admin: {
+        description:
+          "Paste the JSON body you want to output inside <script type=\"application/ld+json\">. No script tags needed.",
+        rows: 10,
+      },
+    },
+    {
       name: "category",
       type: "relationship",
       relationTo: "categories",

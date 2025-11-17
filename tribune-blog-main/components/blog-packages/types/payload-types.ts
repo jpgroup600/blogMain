@@ -51,6 +51,7 @@ export interface Blog {
   featuredImage: string | Media;
   title: string;
   excerpt?: string | null;
+  structuredData?: string | null;
   slug: string;
   content: {
     [k: string]: unknown;

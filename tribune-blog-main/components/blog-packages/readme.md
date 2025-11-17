@@ -53,14 +53,14 @@ export default function BlogListingPage(
 
 ```tsx
 import BlogDetailPage, {
-  createBlogDetailGetStaticPaths,
-  createBlogDetailGetStaticProps,
-} from "@/components/packages/BlogDetailPage";
-
-export const getStaticPaths = createBlogDetailGetStaticPaths();
-export const getStaticProps = createBlogDetailGetStaticProps();
-
-export default BlogDetailPage;
+    createBlogDetailGetStaticPaths,
+    createBlogDetailGetStaticProps,
+  } from "@/app/blog-packages/page/BlogDetailPage";
+  
+  export const getStaticPaths = createBlogDetailGetStaticPaths();
+  export const getStaticProps = createBlogDetailGetStaticProps();
+  
+  export default BlogDetailPage;
 ```
 
 ### 5. Helpers inside the package

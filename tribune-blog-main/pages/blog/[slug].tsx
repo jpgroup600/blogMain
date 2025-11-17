@@ -78,6 +78,12 @@ export default function DynamicBlogPage({
         {blog.meta?.description && (
           <meta name="description" content={blog.meta?.description} />
         )}
+        {blog.structuredData ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: blog.structuredData }}
+          />
+        ) : null}
 
         {typeof blog.meta?.image === "string"
           ? null
