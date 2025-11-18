@@ -141,6 +141,18 @@ export function renderRichText(nodes: SlateNode[]): React.ReactNode {
           </Link>
         );
       case "upload":
+        if (node.value?.mimeType?.startsWith("video")) {
+          return (
+            <video
+              key={i}
+              className="my-[26px] w-full rounded-lg"
+              controls
+              src={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}${node.value?.url}`}
+            >
+              Your browser does not support the video tag.
+            </video>
+          );
+        }
         return (
           <Image
             width={1366}
