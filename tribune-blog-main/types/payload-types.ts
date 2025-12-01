@@ -56,6 +56,11 @@ export interface Blog {
   content: {
     [k: string]: unknown;
   }[];
+  contentBuilder?: {
+    blockType: string;
+    id?: string;
+    [key: string]: unknown;
+  }[] | null;
   category: string | Category;
   tags?: (string | Tag)[] | null;
   relatedBlogs?: (string | Blog)[] | null;

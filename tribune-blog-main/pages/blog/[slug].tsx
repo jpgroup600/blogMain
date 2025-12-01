@@ -9,7 +9,11 @@ import axios from "axios";
 import Link from "next/link";
 import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
 import { formatIsoDate } from "@/utils/formatDate";
-import { renderRichText, SlateNode } from "@/lib/renderRichText";
+import {
+  renderContentBuilder,
+  renderRichText,
+  SlateNode,
+} from "@/components/blog-packages/utils/renderRichText";
 import BlogSection from "@/components/Home/Blogs";
 import { useViewTracker } from "@/hooks/useViewTracker";
 
@@ -149,7 +153,10 @@ export default function DynamicBlogPage({
                 </h1>
               </div>
             </div>
-            <div>{renderRichText(blog.content as SlateNode[])}</div>
+            <div className="flex flex-col">
+              {renderRichText(blog.content as SlateNode[])}
+              {renderContentBuilder(blog.contentBuilder)}
+            </div>
             <div className="mt-5 mb-[7px] flex flex-wrap gap-[7px]">
               {blog.tags
                 ? blog.tags.map((elem, index) => {
