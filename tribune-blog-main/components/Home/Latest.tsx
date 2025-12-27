@@ -2,7 +2,6 @@ import type { Blog, Categories, Tags } from "@/types/payload-types";
 import { formatIsoDate } from "@/utils/formatDate";
 import Link from "next/link";
 import ImageWithFallback from "@/components/fallBack/ImageWithFallback";
-import TrendingBlogs from "@/components/Home/TrendingBlogs";
 import { useState } from "react";
 import axios from "axios";
 
@@ -57,6 +56,8 @@ const Latest: React.FC<Props> = ({ blogs: initialBlogs, featureBlogs, categories
             {displayedBlogs.map((elem, index) => {
               if (typeof elem.featuredImage === "string") return null;
               if (typeof elem.category === "string") return null;
+              console.log("Image URL:", `${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage?.url}`);
+
 
               return (
                 <div key={index} className="flex flex-col">

@@ -25,9 +25,11 @@ const TrendingBlogs: React.FC<Props> = ({
         {title}
       </div>
       <section className="grid gap-x-[30px] gap-y-[40px] md:grid-cols-3 md:gap-y-[57px]">
-        {trendingBlogs.map((blog, index) => {
+        {trendingBlogs.map((blog, _index) => {
           if (typeof blog.featuredImage === "string") return null;
           if (typeof blog.category === "string") return null;
+          console.log("Image URL:", `${process.env.NEXT_PUBLIC_PAYLOAD_URL}${blog.featuredImage?.url}`);
+
 
           return (
             <div className="flex flex-col" key={blog.id}>

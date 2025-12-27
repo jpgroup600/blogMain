@@ -83,3 +83,10 @@
     transform: perspective(1000px) scale(1);
   }
 }
+
+/* stylelint-disable at-rule-no-unknown */
+html,
+body {
+  @apply transition-colors duration-300 ease-in-out;
+}
+/* stylelint-enable at-rule-no-unknown */

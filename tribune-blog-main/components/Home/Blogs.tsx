@@ -11,9 +11,11 @@ const Blogs: React.FC<Props> = ({ blogs }) => {
   return (
     <section className="grid gap-x-[30px] gap-y-[40px] md:grid-cols-3 md:gap-y-[57px]">
       {blogs.map((elem, index) => {
+        
         if (typeof elem === "string") return null;
         if (typeof elem.featuredImage === "string") return null;
         if (typeof elem.category === "string") return null;
+        console.log("Image URL:", `${process.env.NEXT_PUBLIC_PAYLOAD_URL}${elem.featuredImage?.url}`);
 
         return (
           <div className="flex flex-col" key={index}>

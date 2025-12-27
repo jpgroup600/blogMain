@@ -1,23 +1,27 @@
 services:
-  backend:
-    build: ./tribune-blog-cms-main
-    container_name: blog-backend
-    restart: unless-stopped
-    environment:
-      DATABASE_URI: mongodb+srv://demo11website:kingkhan@payloadcluster.ogddnbx.mongodb.net/?retryWrites=true&w=majority&appName=PayloadCluster
-      PAYLOAD_SECRET: 5d14b08e6bbf5d8ff55fded4ef78d4f9
-      FRONTEND_URI: http://localhost:3000
+  backend: 
+    build:
+      context: ./tribune-blog-cms-main
+      dockerfile: Dockerfile
+    container_name: backend
     ports:
       - "4000:4000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URI: mongodb+srv://blog_payload:UYEZZ5f7jJElIsjR@cluster0.4ffsb.mongodb.net/blogPayload?retryWrites=true&w=majority&appName=Cluster0
+      PAYLOAD_SECRET: 5d14b08e6bbf5d8ff55fded4ef78d4f9
+      FRONTEND_URI: http://localhost:3000  # This is probably for CORS; it's fine as-is
+    restart: unless-stopped
 
   frontend:
-    build: ./tribune-blog-main
-    container_name: blog-frontend
-    restart: unless-stopped
-    environment:
-      NEXT_PUBLIC_API_URL: http://localhost:4000
-      NEXT_PUBLIC_PAYLOAD_URL: http://backend:4000
+    build:
+      context: ./tribune-blog-main
+      dockerfile: Dockerfile
+    container_name: frontend
     ports:
       - "3000:3000"
+    environment:
+      PAYLOAD_URL: http://backend:4000  
     depends_on:
       - backend
+    restart: unless-stopped
